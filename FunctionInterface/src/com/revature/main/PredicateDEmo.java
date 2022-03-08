@@ -13,5 +13,10 @@ public class PredicateDEmo {
         List<Integer> list1 =new ArrayList<>(Arrays.asList(1,2,4,8,9));
         List<Integer>list2=list1.stream().filter(func1).collect(Collectors.toList());
         System.out.println(list2);
+        String abc = “”;
+        abc.concat(“abc”);
+        abc.concat(“def”);
+        System.out.println(abc);
+
     }
 }
