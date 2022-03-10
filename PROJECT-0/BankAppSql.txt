@@ -1,10 +1,17 @@
-CREATE TABLE client(
+CREATE TABLE clients(
 	id SERIAL PRIMARY KEY, 
 	first_name VARCHAR(200) NOT NULL,
 	last_name VARCHAR(200) NOT NULL,
-	age INTEGER NOT NULL,
-	address VARCHAR(200) NOT NULL,
-	phone VARCHAR(10) NOT NULL,
-	email VARCHAR(25)
+	age INTEGER NOT NULL);
 	
-);
+drop table client;
+
+insert  into clients(first_name,last_name,age) values('soma','jan',21);
+insert  into clients(first_name,last_name,age) values('nikhil','sasi',25);
+insert  into clients(first_name,last_name,age) values('neithan','nikhil',2);
+
+select * from clients;
+
+update clients set first_name ='soma',last_name ='janardhanan',age =30 where id =1;
+
+delete  from clients where id  =4;

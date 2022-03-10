@@ -9,7 +9,8 @@ public class Client {
     private String last_name;
     private int age;
 
-
+    public Client() {
+    }
 
     public Client(int id, String first_name, String last_name, int age) {
         this.id = id;
