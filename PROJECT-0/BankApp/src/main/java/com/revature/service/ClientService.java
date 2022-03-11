@@ -4,17 +4,16 @@ import com.revature.dao.ClientDao;
 import com.revature.exception.ClientNotFoundException;
 import com.revature.model.Client;
 import com.revature.utility.ConnectionUtility;
-
-import javax.xml.crypto.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ClientService {
     private ClientDao clientDao;
+
+    private static Logger logger = LoggerFactory.getLogger(ClientService.class);
 
     public ClientService() {
         this.clientDao = new ClientDao();
@@ -37,7 +36,7 @@ public class ClientService {
         }
 
     }
-    //delete clint
+    //delete client
     public boolean deleteClientByid(String id) throws SQLException, ClientNotFoundException {
         try {
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class ClientController implements Controller{
-     ClientService clientservice =new ClientService();
+     ClientService clientservice ;
 
     public ClientController() {
         this.clientservice = new ClientService();
@@ -26,7 +26,7 @@ public class ClientController implements Controller{
     private Handler deleteClientByid =(ctx)->{
         String id =ctx.pathParam("client_id");
         Boolean deleteClient  = clientservice.deleteClientByid(id);
-        ctx.json("client");
+        ctx.json("client has been deleted");
     };
     private Handler updateClientByid =(ctx)->{
         String id =ctx.pathParam("client_id");

@@ -4,14 +4,28 @@ CREATE TABLE clients(
 	last_name VARCHAR(200) NOT NULL,
 	age INTEGER NOT NULL);
 	
-drop table client;
+select * from clients;
+
+CREATE TABLE accounts(
+	id SERIAL PRIMARY KEY, 
+	account_name VARCHAR(50) NOT NULL,
+	account_bal  DECIMAL NOT NULL,
+	client_id INTEGER NOT NULL,
+	
+	CONSTRAINT fk_client FOREIGN KEY(client_id) REFERENCES clients(id));
+
 
 insert  into clients(first_name,last_name,age) values('soma','jan',21);
 insert  into clients(first_name,last_name,age) values('nikhil','sasi',25);
-insert  into clients(first_name,last_name,age) values('neithan','nikhil',2);
+insert  into clients(first_name,last_name,age) values('neithan','nikhil',20); 
 
-select * from clients;
+
+drop table clients ;
+drop table accounts;
+insert into accounts(account_name,account_bal,client_id)values('chequeing',700,1);
+insert into accounts(account_name,account_bal,client_id)values('chequeing',1000,2);
+insert into accounts(account_name,account_bal,client_id)values('chequeing',5000,2);
 
 update clients set first_name ='soma',last_name ='janardhanan',age =30 where id =1;
 
-delete  from clients where id  =4;
+delete  from clients where id  =4; 

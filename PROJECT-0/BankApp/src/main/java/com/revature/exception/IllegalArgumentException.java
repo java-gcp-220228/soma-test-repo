@@ -1,2 +1,4 @@
-package com.revature.exception;public class IllegalArgumentException {
+package com.revature.exception;
+
+public class IllegalArgumentException {
 }
