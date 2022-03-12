@@ -36,7 +36,7 @@ public class ClientController implements Controller{
         ctx.json(updatedclient);
     };
     private Handler addClient =(ctx)->{
-
+        
         Client clientToadd =ctx.bodyAsClass(Client.class);
         Client newClient   = clientservice.addClient(clientToadd);
         ctx.json(200);

@@ -50,6 +50,21 @@ public class AccountService {
         }
 
     }
+    public List<Account> getAllAccounts(String id,String amtGreater,String amtLess) throws SQLException, ClientNotFoundException {
+        try {
+            int clientId = Integer.parseInt(id);
+            int amtgt = Integer.parseInt(amtGreater);
+            int amtls = Integer.parseInt(amtLess);
+            Client client = clientDao.getClientById(clientId);
+            if (client == null) {
+                throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
+            }
+            return this.accountDao.getAllaccountsWithCond(clientId,amtgt,amtls);
+        }catch (NumberFormatException e){
+            throw  new  IllegalArgumentException("ID provided for client must be a valid int");
+        }
+
+    }
 
     //Get account by id if exist in client
     public Account getAccountById(String client_id,String acct_id) throws SQLException, ClientNotFoundException {

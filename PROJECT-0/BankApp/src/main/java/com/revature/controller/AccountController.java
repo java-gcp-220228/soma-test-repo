@@ -26,8 +26,17 @@ public class AccountController implements Controller {
     };
     private Handler getAllAccounts=(ctx)-> {
         String id =ctx.pathParam("client_id");
-        List<Account> accounts = accountservice.getAllAccounts(id);
-        ctx.json(accounts);
+        String amtGreater =ctx.queryParam("amountGreaterThan");
+        String amtLess =ctx.queryParam("amountLessThan");
+        if(amtGreater!=null && amtLess!=null){
+            List<Account> accounts = accountservice.getAllAccounts(id,amtGreater,amtLess);
+            ctx.json(accounts);
+        }else{
+            List<Account> accounts = accountservice.getAllAccounts(id);
+            ctx.json(accounts);
+        }
+
+
     };
     private Handler getAllAccountById=(ctx)-> {
             String client_id =ctx.pathParam("client_id");
@@ -53,6 +62,7 @@ public class AccountController implements Controller {
     public void mapEndpoints(Javalin app) {
         app.post("/clients/{client_id}/accounts",addAccountByClientid);
         app.get("/clients/{client_id}/accounts",getAllAccounts);
+        app.get("/clients/{client_id}/accounts?amountLessThan=2000&amountGreaterThan=400",getAllAccounts);
         app.get("/clients/{client_id}/accounts/{account_id}",getAllAccountById);
         app.put("/clients/{client_id}/accounts/{account_id}",updateAccountByid);
         app.delete("/clients/{client_id}/accounts/{account_id}",deleteAccountByid);

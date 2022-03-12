@@ -32,7 +32,30 @@ public class AccountDao {
         }
         return accounts;
     }
+    //get all account with amtgt and amtls
+    public List<Account> getAllaccountsWithCond(int clientid ,int amtgt,int amtls) throws SQLException {
+        List<Account> accounts = new ArrayList<>();
+        try (Connection con = ConnectionUtility.getConnection()) {
+                String sql1="select * from accounts where client_id =? and account_bal<=? and account_bal >=?;";
+                PreparedStatement pstmt = con.prepareStatement(sql1);
+                pstmt.setInt(1, clientid);
+                pstmt.setInt(2, amtls);
+                pstmt.setInt(3, amtgt);
+                ResultSet rs = pstmt.executeQuery();
+                // executeQuery() is used with SELECT
+                while (rs.next()) {
 
+                    int id = rs.getInt("id");
+                    String account_name = rs.getString("account_name");
+                    long account_bal = rs.getLong("account_bal");
+                    int client_id = rs.getInt("client_id");
+                    accounts.add(new Account(id, account_name, account_bal, client_id));
+                }
+
+
+        return accounts;
+    }
+    }
     //add ACCOUNT
     public Account addAccounts(Account account) throws SQLException {
         try (Connection con = ConnectionUtility.getConnection()) {

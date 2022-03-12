@@ -18,6 +18,9 @@ public class ClientService {
     public ClientService() {
         this.clientDao = new ClientDao();
     }
+    public ClientService(ClientDao mockDao) {
+        this.clientDao = mockDao;
+    }
     //Get all clients
     public List<Client> getAllClients() throws SQLException {
         return this.clientDao.getAllClients();
@@ -28,11 +31,11 @@ public class ClientService {
             int clientId = Integer.parseInt(id);
             Client client = clientDao.getClientById(clientId);
             if (client == null) {
-                throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
+                throw new ClientNotFoundException("Client with id :" + clientId + " was not found");
             }
             return client;
         }catch (NumberFormatException e){
-            throw  new  IllegalArgumentException("ID provided for client must be a valid int");
+            throw  new  IllegalArgumentException("ID provided for client must be a valid integer");
         }
 
     }
@@ -88,9 +91,10 @@ public class ClientService {
             throw new IllegalArgumentException("Last name must only have alphabetical characters. Last name input was " + c.getLast_name());
         }
 
-        if (c.getAge() < 0) {
+        if (c.getAge() <=0) {
             throw new IllegalArgumentException("Adding a client with age < 0 is not valid. Age provided was " + c.getAge());
         }
+
     }
     }
 
