@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -75,15 +76,95 @@ public class ClientServiceTest {
 
     }
     //NEGATIVE TEST
-    //@Test
-    /*public void test_getClientInvalidId()throws SQLException{
+    @Test
+    public void test_getClientInvalidId()throws SQLException{
         ClientDao mockDao = mock(ClientDao.class);
         ClientService clientService =new ClientService(mockDao);
         //ACTAND ASSERT
-        Assertions.assertThrows(ClientNotFoundException.class,()->{
+        Assertions.assertThrows(IllegalArgumentException.class,()->{
             clientService.getClientById("abc");
-        });*/
+        });
     }
+    //add positive test
+    @Test
+    public void test_addClient()throws SQLException{
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService =new ClientService(mockDao);
+    //Arrange
+        when(mockDao.addClient(eq(new Client(2,"lixy","mat",25))))
+                .thenReturn(new Client(2,"lixy","mat",25));
+        Client actual = clientService.addClient(new Client(2,"lixy","mat",25));
+        Client expected =new Client(2,"lixy","mat",25);
+        Assertions.assertEquals(expected,actual);
+
+    }
+    //add negative test
+    @Test
+    public void test_validateClient_WithLeadingAndTrailingFirstAndLastName() throws SQLException {
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService =new ClientService(mockDao);
+        //Arrange
+        when(mockDao.addClient(eq(new Client(2,"lixy","mat",25))))
+                .thenReturn(new Client(2,"lixy","mat",25));
+        Client actual = clientService.addClient(new Client(2,"    lixy     ","    mat     ",25));
+        Client expected =new Client(2,"lixy","mat",25);
+        Assertions.assertEquals(expected,actual);
+
+    }
+    @Test
+    public void test_validateClient_FirstnameWithInvalidcharacters() throws SQLException {
+
+        // Arrange
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService = new ClientService(mockDao);
+
+        // Act + Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            clientService.addClient(new Client(0, "lixy123", "mat", 24));
+        });
+    }
+    @Test
+    public void test_validateClient_LastnameWithInvalidcharacters() throws SQLException {
+
+        // Arrange
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService =new ClientService(mockDao);
+
+        // Act + Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            clientService.addClient(new Client(0, "lixy", "mat%123", 24));
+        });
+    }
+    @Test
+    public void test_validateClient_NeagativeAge() throws SQLException {
+
+        // Arrange
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService =new ClientService(mockDao);
+
+        // Act + Assert
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            clientService.addClient(new Client(0, "lixy", "mat", -26));
+        });
+    }
+
+    //update positivetest
+    @Test
+    public void test_UpdateClient() throws SQLException, ClientNotFoundException {
+        // Arrange
+        ClientDao mockDao = mock(ClientDao.class);
+        ClientService clientService =new ClientService(mockDao);
+        Client client =new Client(8,"soma","jan",25);
+        //act
+        when(mockDao.updateClient(eq("8"),eq(client)))
+                .thenReturn(client);
+        Client actual = clientService.updateClient("8",new Client(8,"soma","jans",25));
+        Client expected =new Client(8,"soma","jans",25);
+        Assertions.assertEquals(expected,actual);
+
+
+    }
+}
 
 
 

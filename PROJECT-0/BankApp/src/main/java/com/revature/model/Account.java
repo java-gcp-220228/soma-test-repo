@@ -1,19 +1,24 @@
 package com.revature.model;
 
+import java.util.EnumSet;
 import java.util.Objects;
 
 public class Account {
-
+    public enum AccountNames {
+        CHEQUING,
+        SAVINGS;
+    }
+    public static EnumSet<AccountNames> account_names = EnumSet.allOf(AccountNames.class);
     private int id;
     private String account_name;
-    private long account_bal;
+    private double account_bal;
     private int client_id;
 
     public Account() {
 
     }
 
-    public Account(int id, String account_name, long account_bal, int client_id) {
+    public Account(int id, String account_name, double account_bal, int client_id) {
         this.id = id;
         this.account_name = account_name;
         this.account_bal = account_bal;
@@ -36,7 +41,7 @@ public class Account {
         this.account_name = account_name;
     }
 
-    public long getAccount_bal() {
+    public double getAccount_bal() {
         return account_bal;
     }
 

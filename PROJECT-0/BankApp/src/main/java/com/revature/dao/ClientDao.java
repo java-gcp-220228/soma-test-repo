@@ -70,7 +70,8 @@ public class ClientDao {
         }
     }
     //Update client
-    public Client updateClient(Client client) throws SQLException {
+
+    public Client updateClient(String s, Client client) throws SQLException {
         try(Connection con = ConnectionUtility.getConnection()){
             String sql1 ="update clients set first_name =?," +
                     "                        last_name = ?," +

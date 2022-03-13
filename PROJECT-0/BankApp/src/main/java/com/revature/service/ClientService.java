@@ -3,10 +3,9 @@ package com.revature.service;
 import com.revature.dao.ClientDao;
 import com.revature.exception.ClientNotFoundException;
 import com.revature.model.Client;
-import com.revature.utility.ConnectionUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class ClientService {
             int clientId = Integer.parseInt(id);
             Client client = clientDao.getClientById(clientId);
             if (client == null) {
-                throw new ClientNotFoundException("Client with id :" + clientId + " was not found");
+                throw new ClientNotFoundException("Client with id :" + clientId + " "+" was not found");
             }
             return client;
         }catch (NumberFormatException e){
@@ -64,7 +63,7 @@ public class ClientService {
             }
             validateClientInfomation(c);
             c.setId(clientId);
-            Client updatedClient = clientDao.updateClient(c);
+            Client updatedClient = clientDao.updateClient("1", c);
             return updatedClient;
         }catch (NumberFormatException e){
             throw new IllegalArgumentException("Id provided for client is not valid");

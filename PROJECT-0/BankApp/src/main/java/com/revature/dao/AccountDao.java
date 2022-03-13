@@ -24,7 +24,7 @@ public class AccountDao {
 
                 int id = rs.getInt("id");
                 String account_name = rs.getString("account_name");
-                long account_bal = rs.getLong("account_bal");
+                Double account_bal = rs.getDouble("account_bal");
                 int client_id = rs.getInt("client_id");
                 accounts.add(new Account(id, account_name, account_bal, client_id));
             }
@@ -47,7 +47,7 @@ public class AccountDao {
 
                     int id = rs.getInt("id");
                     String account_name = rs.getString("account_name");
-                    long account_bal = rs.getLong("account_bal");
+                    Double account_bal = rs.getDouble("account_bal");
                     int client_id = rs.getInt("client_id");
                     accounts.add(new Account(id, account_name, account_bal, client_id));
                 }
@@ -64,7 +64,7 @@ public class AccountDao {
             PreparedStatement pstmt = con.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, account.getAccount_name());
-            pstmt.setLong(2, account.getAccount_bal());
+            pstmt.setDouble(2, account.getAccount_bal());
             pstmt.setInt(3, account.getClient_id());
 
             pstmt.executeUpdate();
@@ -87,7 +87,7 @@ public class AccountDao {
             if (rs.next()) {
 
                 String account_name = rs.getString("account_name");
-                long account_bal = rs.getLong("account_bal");
+                Double account_bal = rs.getDouble("account_bal");
                 int client_id = rs.getInt("client_id");
                 return new Account(id, account_name, account_bal, client_id);
             }
@@ -104,7 +104,7 @@ public class AccountDao {
                     "                         where id =?";
             PreparedStatement pstmt = con.prepareStatement(sql1);
             pstmt.setString(1, account.getAccount_name());
-            pstmt.setLong(2, account.getAccount_bal());
+            pstmt.setDouble(2, account.getAccount_bal());
             pstmt.setInt(3, account.getClient_id());
             pstmt.setInt(4, account.getId());
             pstmt.executeUpdate();
