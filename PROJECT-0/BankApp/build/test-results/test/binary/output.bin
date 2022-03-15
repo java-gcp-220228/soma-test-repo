@@ -1,17 +1,17 @@
-s13:54:37,364 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-¸13:54:37,364 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/D:/FullstackTraining/PROJECT-0/BankApp/build/resources/main/logback.xml]
-j13:54:37,494 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
-–13:54:37,495 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-q13:54:37,503 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [myConsoleAppender]
-¶13:54:37,510 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-“13:54:37,539 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.FileAppender]
-n13:54:37,542 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [MyFileAppender]
-¶13:54:37,543 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-s13:54:37,543 |-INFO in ch.qos.logback.core.FileAppender[MyFileAppender] - File property is set to [Mylogfile.log]
-t13:54:37,545 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
-Š13:54:37,545 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [myConsoleAppender] to Logger[ROOT]
-Å13:54:37,546 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [myFileAppender]. Did you define it below instead of above in the configuration file?
-”13:54:37,546 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
-h13:54:37,546 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
-Š13:54:37,547 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@9d44edb - Registering current configuration as safe fallback point
+s01:59:33,020 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+¸01:59:33,021 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/D:/FullstackTraining/PROJECT-0/BankApp/build/resources/main/logback.xml]
+j01:59:33,131 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+–01:59:33,132 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+q01:59:33,140 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [myConsoleAppender]
+¶01:59:33,146 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+“01:59:33,175 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.FileAppender]
+n01:59:33,177 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [MyFileAppender]
+¶01:59:33,178 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+s01:59:33,179 |-INFO in ch.qos.logback.core.FileAppender[MyFileAppender] - File property is set to [Mylogfile.log]
+t01:59:33,181 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+Š01:59:33,181 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [myConsoleAppender] to Logger[ROOT]
+Å01:59:33,182 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [myFileAppender]. Did you define it below instead of above in the configuration file?
+”01:59:33,182 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+h01:59:33,182 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+‹01:59:33,182 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@20ef154b - Registering current configuration as safe fallback point
 

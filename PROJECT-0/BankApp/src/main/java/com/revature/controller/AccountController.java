@@ -52,9 +52,9 @@ public class AccountController implements Controller {
     };
     private Handler updateAccountByid=(ctx)-> {
         String client_id = ctx.pathParam("client_id");
-
+        String acct_id = ctx.pathParam("account_id");
         Account accountToedit = ctx.bodyAsClass(Account.class);
-        Account editedaccount = accountservice.updateAccountById(client_id, accountToedit);
+        Account editedaccount = accountservice.updateAccountById(client_id,acct_id, accountToedit);
         ctx.json(editedaccount);
     };
 
@@ -62,15 +62,14 @@ public class AccountController implements Controller {
         String client_id = ctx.pathParam("client_id");
         String acct_id = ctx.pathParam("account_id");
         Boolean deleteClient = accountservice.deleteAccountByid(client_id, acct_id);
-        ctx.json("client has been deleted");
+        ctx.json("Account has been deleted");
     };
     public Account bodyValidate(Context ctx)
     {
         String id =ctx.pathParam("client_id");
         BodyValidator<Account> body = ctx.bodyValidator(Account.class);
-        return body.check(account -> Account.account_names.contains(Account.AccountNames.valueOf(account.getAccount_name())),
-                        "Invalid account Name")
-                .check(account -> account.getClient_id() > 0, "Invalid Client Id")
+        return body
+                .check(account ->( (account.getClient_id() > 0) && account.getClient_id()==Integer.parseInt(id)), "Invalid Client Id"+" "+"Client Id must be"+" "+id)
                 .get();
     }
     @Override

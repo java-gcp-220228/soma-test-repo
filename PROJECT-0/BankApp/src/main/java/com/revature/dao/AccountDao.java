@@ -99,7 +99,7 @@ public class AccountDao {
         return null;
     }
 //update account
-    public Account updateAccount(Account account) throws SQLException {
+    public Account updateAccount(int client_id ,int acct_id ,Account account) throws SQLException {
         try (Connection con = ConnectionUtility.getConnection()) {
             String sql1 = "update accounts set account_name =?," +
                     "                        account_bal = ?," +
@@ -108,8 +108,8 @@ public class AccountDao {
             PreparedStatement pstmt = con.prepareStatement(sql1);
             pstmt.setString(1, account.getAccount_name());
             pstmt.setDouble(2, account.getAccount_bal());
-            pstmt.setInt(3, account.getClient_id());
-            pstmt.setInt(4, account.getId());
+            pstmt.setInt(3, client_id);
+            pstmt.setInt(4, acct_id);
             pstmt.executeUpdate();
         }
         return account;

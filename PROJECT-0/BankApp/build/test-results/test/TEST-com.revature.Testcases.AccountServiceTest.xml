@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.revature.Testcases.AccountServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-03-15T05:59:32" hostname="DESKTOP-VKFA5UJ" time="1.217">
+  <properties/>
+  <testcase name="test_getAllAccountsByClientidAndAcctid()" classname="com.revature.Testcases.AccountServiceTest" time="1.188"/>
+  <testcase name="test_getAllAccountsByClientid_InvalidId()" classname="com.revature.Testcases.AccountServiceTest" time="0.004"/>
+  <testcase name="test_getAllAccountsByClientid()" classname="com.revature.Testcases.AccountServiceTest" time="0.005"/>
+  <testcase name="test_getAllAccountsByClientid_clientNotFound()" classname="com.revature.Testcases.AccountServiceTest" time="0.015"/>
+  <system-out><![CDATA[01:59:33,020 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+01:59:33,021 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/D:/FullstackTraining/PROJECT-0/BankApp/build/resources/main/logback.xml]
+01:59:33,131 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+01:59:33,132 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+01:59:33,140 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [myConsoleAppender]
+01:59:33,146 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+01:59:33,175 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.FileAppender]
+01:59:33,177 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [MyFileAppender]
+01:59:33,178 |-INFO in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+01:59:33,179 |-INFO in ch.qos.logback.core.FileAppender[MyFileAppender] - File property is set to [Mylogfile.log]
+01:59:33,181 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+01:59:33,181 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [myConsoleAppender] to Logger[ROOT]
+01:59:33,182 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [myFileAppender]. Did you define it below instead of above in the configuration file?
+01:59:33,182 |-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+01:59:33,182 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+01:59:33,182 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@20ef154b - Registering current configuration as safe fallback point
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

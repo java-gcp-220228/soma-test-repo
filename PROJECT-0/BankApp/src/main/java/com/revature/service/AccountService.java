@@ -1,6 +1,7 @@
 package com.revature.service;
 import com.revature.dao.AccountDao;
 import com.revature.dao.ClientDao;
+import com.revature.exception.AcctNotFoundException;
 import com.revature.exception.ClientNotFoundException;
 import com.revature.model.Account;
 import com.revature.model.Client;
@@ -16,7 +17,11 @@ public class AccountService {
         this.clientDao =  new ClientDao();
         this.accountDao = new AccountDao();
     }
+    public AccountService(AccountDao mockDao,ClientDao clientmockDao) {
 
+        this.accountDao = mockDao;
+        this.clientDao =  clientmockDao;
+    }
 // Create a new account for a client with id of X
 
     public Account addAccountByClientid(String client_id,Account account) throws SQLException, ClientNotFoundException {
@@ -84,14 +89,16 @@ public class AccountService {
 
     }
     //Update account by accountid if client exist
-    public Account updateAccountById(String client_id,Account account) throws SQLException, ClientNotFoundException {
+    public Account updateAccountById(String client_id,String acct_id,Account account) throws SQLException, AcctNotFoundException {
         try {
             int clientId = Integer.parseInt(client_id);
-            Client client = clientDao.getClientById(clientId);
-            if (client == null) {
-                throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
+            int acctId = Integer.parseInt(acct_id);
+            Account acct = accountDao.getAccountById(clientId,acctId);
+            if (acct == null) {
+                throw new AcctNotFoundException("Account with id :" + acctId +"and client id : "+clientId+ "was not found");
             }
-            Account editedAccount =accountDao.updateAccount(account);
+
+            Account editedAccount =accountDao.updateAccount(clientId,acctId,account);
             return editedAccount;
 
         }catch (NumberFormatException e){
@@ -100,18 +107,18 @@ public class AccountService {
 
     }
     //delete account
-    public boolean deleteAccountByid(String client_id,String acct_id) throws SQLException, ClientNotFoundException {
+    public boolean deleteAccountByid(String client_id,String acct_id) throws SQLException, ClientNotFoundException, AcctNotFoundException {
         try {
 
             int clientId = Integer.parseInt(client_id);
             int acctId = Integer.parseInt(acct_id);
-            Client client = clientDao.getClientById(clientId);
-            if (client == null) {
-                throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
+            Account acct = accountDao.getAccountById(clientId,acctId);
+            if (acct == null) {
+                throw new AcctNotFoundException("Account with id :" + acctId +"and client id: "+clientId+ "was not found");
             }
             Boolean deleteAcct = accountDao.deleteAccounttByid(acctId);
             if (deleteAcct == false) {
-                throw new ClientNotFoundException("Account with id :" + acctId  + "was not found");
+                throw new ClientNotFoundException("Account with id :" + acctId +""+" was not found");
             }
             return true;
 

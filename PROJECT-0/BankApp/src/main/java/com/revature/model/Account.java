@@ -4,11 +4,12 @@ import java.util.EnumSet;
 import java.util.Objects;
 
 public class Account {
-    public enum AccountNames {
+   /*public static  enum AccountNames {
         CHEQUING,
         SAVINGS;
-    }
-    public static EnumSet<AccountNames> account_names = EnumSet.allOf(AccountNames.class);
+
+    }*/
+  //  public static EnumSet<AccountNames> account_names = EnumSet.allOf(AccountNames.class);
     private int id;
     private String account_name;
     private double account_bal;
@@ -16,6 +17,13 @@ public class Account {
 
     public Account() {
 
+    }
+
+    public Account( String account_name, double account_bal, int client_id) {
+
+        this.account_name = account_name;
+        this.account_bal = account_bal;
+        this.client_id = client_id;
     }
 
     public Account(int id, String account_name, double account_bal, int client_id) {
