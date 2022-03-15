@@ -43,10 +43,10 @@ public class ClientService {
         try {
 
             int clientId = Integer.parseInt(id);
-            Boolean deleteClient = clientDao.deleteClientByid(clientId);
-            if (deleteClient == false) {
-                throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
+            if (clientDao.getClientById(clientId) == null) {
+                throw new ClientNotFoundException("Client with id " + id + " does not exits. Unable to delete client.");
             }
+            Boolean deleteClient = clientDao.deleteClientByid(clientId);
             return true;
         }catch (NumberFormatException e){
             throw  new  IllegalArgumentException("ID provided for client must be a valid int");
@@ -63,7 +63,7 @@ public class ClientService {
             }
             validateClientInfomation(c);
             c.setId(clientId);
-            Client updatedClient = clientDao.updateClient("1", c);
+            Client updatedClient = clientDao.updateClient(c);
             return updatedClient;
         }catch (NumberFormatException e){
             throw new IllegalArgumentException("Id provided for client is not valid");
@@ -81,7 +81,12 @@ public class ClientService {
     public void validateClientInfomation(Client c) {
         c.setFirst_name(c.getFirst_name().trim());
         c.setLast_name(c.getLast_name().trim());
-
+        if (c.getFirst_name().equals("")) {
+            throw new IllegalArgumentException("First name cannot be empty");
+        }
+        if (c.getLast_name().equals("")) {
+            throw new IllegalArgumentException("Last name cannot be empty");
+        }
         if (!c.getFirst_name().matches("[a-zA-Z]+")) {
             throw new IllegalArgumentException("First name must only have alphabetical characters. First name input was " + c.getFirst_name());
         }

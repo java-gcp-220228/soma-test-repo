@@ -75,7 +75,7 @@ public class AccountService {
             if (client == null) {
                 throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
             }
-            Account account =accountDao.getAccountById(acctId);
+            Account account =accountDao.getAccountById(clientId,acctId);
             return account;
 
         }catch (NumberFormatException e){

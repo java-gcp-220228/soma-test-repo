@@ -77,7 +77,6 @@ public class AccountController implements Controller {
     public void mapEndpoints(Javalin app) {
         app.post("/clients/{client_id}/accounts",addAccountByClientid);
         app.get("/clients/{client_id}/accounts",getAllAccounts);
-     //   app.get("/clients/{client_id}/accounts?amountLessThan=2000&amountGreaterThan=400",getAllAccounts);
         app.get("/clients/{client_id}/accounts/{account_id}",getAllAccountById);
         app.put("/clients/{client_id}/accounts/{account_id}",updateAccountByid);
         app.delete("/clients/{client_id}/accounts/{account_id}",deleteAccountByid);

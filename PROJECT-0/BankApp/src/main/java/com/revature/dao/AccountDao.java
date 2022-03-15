@@ -77,19 +77,22 @@ public class AccountDao {
         }
     }
 
-    //get account with accountid
-    public Account getAccountById(int id) throws SQLException {
+    //get account with accountid and clientid
+    public Account getAccountById(int client_id,int acct_id) throws SQLException {
         try (Connection con = ConnectionUtility.getConnection()) {
-            String sql1 = "select * from accounts where id=?";
+            String sql1 = "select accounts.id,accounts.account_name ,accounts .account_bal ,accounts.client_id  from accounts inner join clients \n" +
+                    "on accounts.client_id =clients.id  where accounts.client_id =? and accounts.id =? group by accounts.id ";
             PreparedStatement pstmt = con.prepareStatement(sql1);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, client_id);
+            pstmt.setInt(2, acct_id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
 
+                int acctId = rs.getInt("id");
                 String account_name = rs.getString("account_name");
                 Double account_bal = rs.getDouble("account_bal");
-                int client_id = rs.getInt("client_id");
-                return new Account(id, account_name, account_bal, client_id);
+                int clientId = rs.getInt("client_id");
+                return new Account(acctId, account_name, account_bal, clientId);
             }
         }
 
