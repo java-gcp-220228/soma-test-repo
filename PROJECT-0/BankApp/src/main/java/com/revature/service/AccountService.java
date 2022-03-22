@@ -72,7 +72,7 @@ public class AccountService {
     }
 
     //Get account by id if exist in client
-    public Account getAccountById(String client_id,String acct_id) throws SQLException, ClientNotFoundException {
+    public Account getAccountById(String client_id,String acct_id) throws SQLException, ClientNotFoundException, AcctNotFoundException {
         try {
             int clientId = Integer.parseInt(client_id);
             int acctId = Integer.parseInt(acct_id);
@@ -81,6 +81,10 @@ public class AccountService {
                 throw new ClientNotFoundException("Client with id :" + clientId + "was not found");
             }
             Account account =accountDao.getAccountById(clientId,acctId);
+            if(account==null)
+            {
+                throw new AcctNotFoundException("Account with id :" + acctId +"and client id : "+clientId+ "was not found");
+            }
             return account;
 
         }catch (NumberFormatException e){
@@ -94,6 +98,8 @@ public class AccountService {
             int clientId = Integer.parseInt(client_id);
             int acctId = Integer.parseInt(acct_id);
             Account acct = accountDao.getAccountById(clientId,acctId);
+            account.setClient_id(clientId);
+            account.setId(acctId);
             if (acct == null) {
                 throw new AcctNotFoundException("Account with id :" + acctId +"and client id : "+clientId+ "was not found");
             }

@@ -5,28 +5,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class HashMapDemo {
-    public static void main(String[] args) throws ParseException {
-     /*   HashMap<Integer,String> map1 =new HashMap<>();
-        map1.put(1,"soma");
-        map1.put(2,"nikhil");
-        map1.put(3,"neithan");
-        map1.put(4,"family");
-       for (Map.Entry m : map1.entrySet()){
-           System.out.println(m.getKey());
-           System.out.println(m.getValue());
-       }
-        for (String val: map1.values())
+    public static void main(String[] args) {
+       ;
+        int sum =0;
+ Scanner obj = new Scanner(System.in);
+ int arr[] =new int[obj.nextInt()];
+ int input  = obj.nextInt();
+ for(int i=0;i<arr.length;i++){
+     arr[i]=obj.nextInt();
 
-        System.out.println(val);
+        }
+        for(int i=0;i<arr.length;i++){
+           int a= arr[i];
+           int b=arr[i]+1;
+            sum =a+b;
 
-        for (int i:map1.keySet()) {
-            System.out.println(i);*/
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
-        System.out.println(new Date());
-        String dateWithoutTime = sdf.format(new Date());
-        System.out.println(dateWithoutTime);
+        }
+
+}
+
+
 
 
         }

@@ -2,6 +2,7 @@ package com.revature.Testcases;
 
 import com.revature.dao.AccountDao;
 import com.revature.dao.ClientDao;
+import com.revature.exception.AcctNotFoundException;
 import com.revature.exception.ClientNotFoundException;
 import com.revature.model.Account;
 import com.revature.model.Client;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,8 +27,8 @@ public class AccountServiceTest {
     AccountService acctservice;
     @BeforeEach
     public  void setup(){
-         mockedObject = mock(AccountDao.class);
         //Arrange
+         mockedObject = mock(AccountDao.class);
          clientmockDao = mock(ClientDao.class);
          clientService = new ClientService(clientmockDao);
          acctservice = new AccountService(mockedObject,clientmockDao);
@@ -78,7 +79,7 @@ public class AccountServiceTest {
 
     @Test
     //get all accts byclientid and acctid
-    public void test_getAllAccountsByClientidAndAcctid() throws SQLException, ClientNotFoundException {
+    public void test_getAllAccountsByClientidAndAcctid() throws SQLException, ClientNotFoundException, AcctNotFoundException {
         Client fakeClient = new Client(1, "soma", "jan", 26);
         Account fakeAcct =new Account(1, "CHEQUING", 5000, 1);
 
@@ -90,4 +91,58 @@ public class AccountServiceTest {
 
     }
 
+    @Test
+    //ADD account testcase-positive
+    public void test_addAccounts() throws SQLException, ClientNotFoundException {
+        Client fakeClient = new Client(1, "soma", "jan", 26);
+        Account fakeAcct = new Account(1, "CHEQUING", 5000, 1);
+        when(clientmockDao.getClientById(anyInt())).thenReturn(fakeClient);
+        when(mockedObject.addAccounts(eq(new Account(1, "CHEQUING", 5000, 1)))).thenReturn(new Account(1, "CHEQUING", 5000, 1));
+        Account actual = acctservice.addAccountByClientid("18",new Account(1, "CHEQUING", 5000, 1));
+        Account expected =fakeAcct;
+        Assertions.assertEquals(expected,actual);
+    }
+    @Test
+    //Get all accounts of client using query parameter lessthan and greater than
+    public  void test_getAllAccounts_withqueryparameter() throws SQLException, ClientNotFoundException {
+
+        Client fakeClient = new Client(1, "soma", "jan", 27);
+
+        List<Account> fakeaccts = new ArrayList<>();
+        fakeaccts.add(new Account(1, "CHEQUING", 2000, 1));
+        fakeaccts.add(new Account(2, "SAVINGS", 400, 1));
+        fakeaccts.add(new Account(3, "TFSA", 3000, 1));
+        fakeaccts.add(new Account(4, "RRSP", 1000, 1));
+        when(clientmockDao.getClientById(eq(1))).thenReturn(fakeClient);
+        when(mockedObject.getAllaccountsWithCond(eq(1), eq(2000), eq(400))).thenReturn(fakeaccts);
+
+        List<Account> actualAccounts = acctservice.getAllAccounts("1", "2000", "400");
+
+        Assertions.assertEquals(fakeaccts.size(), actualAccounts.size());
+    }
+    @Test
+    //testupdate accts
+    public void test_UpdateAcounts() throws SQLException, AcctNotFoundException {
+
+        Account fakeAcct =new Account(2, "CHEQUING", 5000, 1);
+        Account newAcct =new Account(2, "SAVINGS", 6000, 1);
+        when(mockedObject.getAccountById(anyInt(),anyInt())).thenReturn(fakeAcct);
+        when(mockedObject.updateAccount(1,2,new Account(2, "SAVINGS", 6000, 1))).thenReturn((newAcct));
+        Account actual = acctservice.updateAccountById("1","2",new Account(2, "SAVINGS", 6000, 1));
+        Account expected = newAcct;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    //dELETE Accounts
+    public void delete_Account() throws SQLException, ClientNotFoundException, AcctNotFoundException {
+
+        Account fakeAcct =new Account(2, "CHEQUING", 5000, 1);
+        //act
+        when(mockedObject.getAccountById(anyInt(),anyInt())).thenReturn(fakeAcct);
+        when(mockedObject.deleteAccounttByid(eq(2))).thenReturn(true);
+        //Assert
+        Assertions.assertTrue( acctservice.deleteAccountByid("1","2"));
+
+    }
 }

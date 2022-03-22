@@ -36,7 +36,7 @@ public class AccountDao {
     public List<Account> getAllaccountsWithCond(int clientid ,int amtgt,int amtls) throws SQLException {
         List<Account> accounts = new ArrayList<>();
         try (Connection con = ConnectionUtility.getConnection()) {
-                String sql1="select * from accounts where client_id =? and account_bal<=? and account_bal >=?;";
+                String sql1="select * from accounts where client_id =? and account_bal<? and account_bal >?;";
                 PreparedStatement pstmt = con.prepareStatement(sql1);
                 pstmt.setInt(1, clientid);
                 pstmt.setInt(2, amtls);
@@ -110,7 +110,8 @@ public class AccountDao {
             pstmt.setDouble(2, account.getAccount_bal());
             pstmt.setInt(3, client_id);
             pstmt.setInt(4, acct_id);
-            pstmt.executeUpdate();
+
+
         }
         return account;
     }
