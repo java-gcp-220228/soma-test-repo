@@ -5,7 +5,7 @@ import org.postgresql.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-        import java.sql.SQLException;
+import java.sql.SQLException;
 
 public class ConnectionUtility {
     //TODO 2-Create connection utility class to return connection obj to use in DAO

@@ -14,14 +14,22 @@ public class User {
     public User() {
     }
 
-    public User(int id, String userName, String password, String firstName, String lastName, String email, String userRole) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.userRole = userRole;
+
+    public User(int userid, String username, String pass, String userrole) {
+        this.id = userid;
+        this.userName =username;
+        this.password =pass;
+
+    }
+
+    public User(int userid, String username, String pass, String firstname, String lastname, String email, String userrole) {
+        this.id = userid;
+        this.userName =username;
+        this.password =pass;
+        this.firstName = firstname;
+        this.lastName=lastname;
+        this.email =email;
+        this.userRole =userrole;
     }
 
     public int getId() {

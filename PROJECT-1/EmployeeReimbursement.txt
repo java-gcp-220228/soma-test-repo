@@ -1,55 +1,43 @@
 CREATE
 *******
 ----------CREATE-----------
-CREATE TABLE clients(
+CREATE TABLE ERS_USER_ROLES(
+	ID SERIAL PRIMARY KEY, 
+	USER_ROLE VARCHAR 2(10) NOT NULL);
+
+
+CREATE TABLE ERS_USERS(
 	id SERIAL PRIMARY KEY, 
-	first_name VARCHAR(200) NOT NULL,
-	last_name VARCHAR(200) NOT NULL,
-	age INTEGER NOT NULL);
-
---------Accounts----------
-CREATE TABLE accounts(
-	id SERIAL PRIMARY KEY, 
-	account_name VARCHAR(50) NOT NULL,
-	account_bal  DECIMAL NOT NULL,
-	client_id INTEGER NOT NULL,
-	CONSTRAINT fk_client FOREIGN KEY(client_id) REFERENCES clients(id) on delete cascade);
-
-SELECT
-******
-select * from clients;
-select * from accounts;
+	ERS_USERNAME VARCHAR (50) NOT NULL,
+        ERS_PASSWORD VARCHAR (50) NOT NULL,
+	USER_FIRSTNAME VARCHAR (100) NOT NULL,
+	USER_LASTNAME VARCHAR (100) NOT NULL,
+	USER_EMAIL VARCHAR (150) NOT NULL,
+	USER_ROLE_ID INTEGER NOT NULL,
+	CONSTRAINT fk_USER_ROLE FOREIGN KEY(USER_ROLE_ID ) REFERENCES ERS_USER_ROLES(id) on delete cascade);
 
 
-INSERT
-******
----------CLIENT------------
-insert  into clients(first_name,last_name,age) values('soma','jan',21);
-insert  into clients(first_name,last_name,age) values('nikhil','MS',25);
-insert  into clients(first_name,last_name,age) values('neithan','nikhil',20);
+INSERT INTO ERS_USER_ROLES (USER_ROLE)
+VALUES ('MANAGER'),
+('EMPLOYEE');
 
-----------ACCOUNTS----------
+INSERT INTO ERS_USER_ROLES (USER_ROLE)
+VALUES ('MANAGER'),
+('EMPLOYEE');
+select * from ERS_USER_ROLES;
 
-insert into accounts(account_name,account_bal,client_id)values('chequeing',700,1);
-insert into accounts(account_name,account_bal,client_id)values('chequeing',1000,2);
-insert into accounts(account_name,account_bal,client_id)values('chequeing',5000,3);
+INSERT INTO ERS_USERS (ERS_USERNAME,ERS_PASSWORD,USER_FIRSTNAME,USER_LASTNAME,USER_EMAIL,USER_ROLE_ID)
+VALUES ('soma','soma123','soma','jan','soma.j18@gmail.com',1);
+INSERT INTO ERS_USERS (ERS_USERNAME,ERS_PASSWORD,USER_FIRSTNAME,USER_LASTNAME,USER_EMAIL,USER_ROLE_ID)
+VALUES ('nikhil','nikhil123','nikhil','mp','nikhil@gmail.com',1);
+INSERT INTO ERS_USERS (ERS_USERNAME,ERS_PASSWORD,USER_FIRSTNAME,USER_LASTNAME,USER_EMAIL,USER_ROLE_ID)
+VALUES ('neithan','neithan123','neithan','ns','nate@gmail.com',1);
+INSERT INTO ERS_USERS (ERS_USERNAME,ERS_PASSWORD,USER_FIRSTNAME,USER_LASTNAME,USER_EMAIL,USER_ROLE_ID)
+VALUES ('lixy','lixy321','lixy','eldho','lixy@gmail.com',2);
+INSERT INTO ERS_USERS (ERS_USERNAME,ERS_PASSWORD,USER_FIRSTNAME,USER_LASTNAME,USER_EMAIL,USER_ROLE_ID)
+VALUES ('eldho','eldho321','eldho','mat','eldho@gmail.com',2);
 
-insert into accounts(account_name,account_bal,client_id)values('saving',700,1);
-insert into accounts(account_name,account_bal,client_id)values('saving',1000,2);
-insert into accounts(account_name,account_bal,client_id)values('saving',5000,3);
+select * from ERS_USERS;
 
-insert into accounts(account_name,account_bal,client_id)values('TFSA',700,1);
-insert into accounts(account_name,account_bal,client_id)values('TFSA',1000,2);
-insert into accounts(account_name,account_bal,client_id)values('TFSA',5000,3);
-
-
-JOIN
-*****
-select accounts.id,accounts .account_name ,accounts .account_bal ,accounts.client_id  from accounts inner join clients 
-on accounts.client_id =clients.id  where accounts.client_id =1 and accounts.id =2 group by accounts.id ;
-
-
-
-
-
-	
+select ERS_USERS.ERS_USERNAME,ERS_USERS.ERS_PASSWORD,ERS_USERS.user_firstname ,ERS_USERS.user_lastname ,ERS_USERS.user_email ,ERS_USER_ROLES.user_role from ERS_USERS inner join ERS_USER_ROLES on ERS_USERS.user_role_id = ERS_USER_ROLES.id where 
+ERS_USERS.ers_username ='soma' and ERS_USERS.ers_password ='soma123' ;
