@@ -27,15 +27,15 @@ public class UserDao {
             psmt.setString(2,password);
             ResultSet rs = psmt.executeQuery();
             if(rs.next()){
-                int userid = rs.getInt("id");
-                String username =rs.getString("ers_username");
-                String pass  =rs.getString("ers_password");
+              //  int userid = rs.getInt("id");
+              //  String username =rs.getString("ers_username");
+              //  String pass  =rs.getString("ers_password");
                String firstname  =rs.getString("user_firstname");
                String lastname  =rs.getString("user_lastname");
               String email  =rs.getString("user_email");
                 String userrole  =rs.getString("user_role");
                 //return new User(userid,username,pass,userrole);
-                return new User(userid,username,pass,firstname,lastname,email,userrole);
+                return new User(firstname,lastname,email,userrole);
             }
 
         }

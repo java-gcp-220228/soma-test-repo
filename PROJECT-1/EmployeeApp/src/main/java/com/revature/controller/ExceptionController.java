@@ -12,8 +12,16 @@ public class ExceptionController implements Controller{
         ctx.json(e.getMessage());
 
     };
+
+        private ExceptionHandler UnauthorizedResponse=(e,ctx)->{
+            ctx.status(400);
+            ctx.json(e.getMessage());
+
+        };
     @Override
     public void mapEndpoints(Javalin app) {
+
         app.exception(FailedLoginException.class,failedLogin);
+        app.exception(FailedLoginException.class,UnauthorizedResponse);
     }
 }

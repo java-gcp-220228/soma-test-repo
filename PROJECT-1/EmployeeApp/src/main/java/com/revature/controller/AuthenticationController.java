@@ -2,6 +2,7 @@ package com.revature.controller;
 
 import com.revature.dto.LoginDTO;
 import com.revature.model.User;
+import com.revature.service.JWTService;
 import com.revature.service.UserService;
 import io.javalin.Javalin;
 import io.javalin.http.Handler;
@@ -9,19 +10,22 @@ import io.javalin.http.Handler;
 public class AuthenticationController implements  Controller{
     private UserService userservice;
     private  LoginDTO loginInfo;
+    private JWTService jwtservice;
 
     public AuthenticationController() {
         this.userservice = new UserService();
         this.loginInfo =new LoginDTO();
+        this.jwtservice =new JWTService();
     }
 
     private Handler login =(ctx)->{
 
         System.out.println("Login function invoked");
-        System.out.println(ctx.body());
         loginInfo = ctx.bodyAsClass(LoginDTO.class);
-       // String user1 =loginInfo.getUserName();
         User user = userservice.login(loginInfo.getUsername(),loginInfo.getPassword());
+        String jwt =this.jwtservice.createJWT(user);
+        ctx.header("Access-Control-Expose-Header","*");
+        ctx.header("Token",jwt);
         ctx.json(user);
 
     };

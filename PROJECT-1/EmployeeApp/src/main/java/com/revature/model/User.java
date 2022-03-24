@@ -22,14 +22,20 @@ public class User {
 
     }
 
-    public User(int userid, String username, String pass, String firstname, String lastname, String email, String userrole) {
-        this.id = userid;
-        this.userName =username;
-        this.password =pass;
-        this.firstName = firstname;
-        this.lastName=lastname;
+
+    public User(int usrid, String firstname, String lastname, String email, String userrole) {
+        this.id =usrid;
+        this.firstName =firstname;
+        this.lastName =lastname;
         this.email =email;
-        this.userRole =userrole;
+        this.userRole=userrole;
+    }
+    public User( String firstname, String lastname, String email, String userrole) {
+
+        this.firstName =firstname;
+        this.lastName =lastname;
+        this.email =email;
+        this.userRole=userrole;
     }
 
     public int getId() {
