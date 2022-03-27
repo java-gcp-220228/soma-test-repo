@@ -1,17 +1,21 @@
 package com.revature.model;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Objects;
 
 public class Reimbursement {
     private int id;
     private int reimb_amount;
-    private String reimb_date;
     private String reimb_desc;
-    private String reimb_type;
-    private String reimb_status;
+    private String reimb_date;
+    private String resolve_date;
     private User reimb_author;
     private User reimb_resolver;
+    private String reimb_type;
+    private String reimb_status;
+
+
 
     public Reimbursement() {
     }
@@ -25,6 +29,29 @@ public class Reimbursement {
         this.reimb_status = reimb_status;
         this.reimb_author = reimb_author;
 
+    }
+
+    public Reimbursement(int rid, int ramt, String rdesc, String rsubdate, String rresolvedate, User user,User manager, String rstatus, String rtype) {
+        this.id = rid;
+        this.reimb_amount = ramt;
+        this.reimb_desc = rdesc;
+
+        this.reimb_date =rsubdate;
+        this.resolve_date = rresolvedate;
+        this.reimb_author=user;
+       this.reimb_resolver=manager;
+        this.reimb_type=rtype;
+        this.reimb_status=rstatus;
+    }
+
+    public String getResolve_date() {
+        return resolve_date;
+    }
+
+
+
+    public void setResolve_date(String resolve_date) {
+        this.resolve_date = resolve_date;
     }
 
     public int getId() {
@@ -96,12 +123,12 @@ public class Reimbursement {
         if (this == o) return true;
         if (!(o instanceof Reimbursement)) return false;
         Reimbursement that = (Reimbursement) o;
-        return getId() == that.getId() && getReimb_amount() == that.getReimb_amount() && getReimb_date().equals(that.getReimb_date()) && getReimb_desc().equals(that.getReimb_desc()) && getReimb_type().equals(that.getReimb_type()) && getReimb_status().equals(that.getReimb_status()) && getReimb_author().equals(that.getReimb_author()) && getReimb_resolver().equals(that.getReimb_resolver());
+        return getId() == that.getId() && getReimb_amount() == that.getReimb_amount() && Objects.equals(getReimb_desc(), that.getReimb_desc()) && Objects.equals(getReimb_date(), that.getReimb_date()) && Objects.equals(getResolve_date(), that.getResolve_date()) && Objects.equals(getReimb_author(), that.getReimb_author()) && Objects.equals(getReimb_resolver(), that.getReimb_resolver()) && Objects.equals(getReimb_type(), that.getReimb_type()) && Objects.equals(getReimb_status(), that.getReimb_status());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getReimb_amount(), getReimb_date(), getReimb_desc(), getReimb_type(), getReimb_status(), getReimb_author(), getReimb_resolver());
+        return Objects.hash(getId(), getReimb_amount(), getReimb_desc(), getReimb_date(), getResolve_date(), getReimb_author(), getReimb_resolver(), getReimb_type(), getReimb_status());
     }
 
     @Override
@@ -109,12 +136,13 @@ public class Reimbursement {
         return "Reimbursement{" +
                 "id=" + id +
                 ", reimb_amount=" + reimb_amount +
-                ", reimb_date='" + reimb_date + '\'' +
                 ", reimb_desc='" + reimb_desc + '\'' +
-                ", reimb_type='" + reimb_type + '\'' +
-                ", reimb_status='" + reimb_status + '\'' +
+                ", reimb_date='" + reimb_date + '\'' +
+                ", resolve_date='" + resolve_date + '\'' +
                 ", reimb_author=" + reimb_author +
                 ", reimb_resolver=" + reimb_resolver +
+                ", reimb_type='" + reimb_type + '\'' +
+                ", reimb_status='" + reimb_status + '\'' +
                 '}';
     }
 }

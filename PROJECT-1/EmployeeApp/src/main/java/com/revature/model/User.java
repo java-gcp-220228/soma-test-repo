@@ -23,14 +23,16 @@ public class User {
     }
 
 
-    public User(int usrid, String firstname, String lastname, String email, String userrole) {
+    public User(int usrid, String username, String pass,String firstname, String lastname, String email, String userrole) {
         this.id =usrid;
+        this.userName =username;
+        this.password =pass;
         this.firstName =firstname;
         this.lastName =lastname;
         this.email =email;
         this.userRole=userrole;
     }
-    public User( String firstname, String lastname, String email, String userrole) {
+   public User( String firstname, String lastname, String email, String userrole) {
 
         this.firstName =firstname;
         this.lastName =lastname;

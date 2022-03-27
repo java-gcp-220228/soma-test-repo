@@ -5,14 +5,19 @@ import java.util.Objects;
 public class ResponseRemDTO {
     private  int id;
     private int reimb_amount;
-    private String reimb_date;
     private String reimb_desc;
-    private String reimb_type;
+    private String reimb_date;
+     private String reimb_type;
     private String reimb_status;
+
+  /*----------user-------------------*/
     private String firstname;
     private String lastname;
     private  String email;
     private  String userrole;
+
+
+
 
     public ResponseRemDTO() {
     }
@@ -21,6 +26,7 @@ public class ResponseRemDTO {
     this.id =id;
     this.reimb_amount=reimb_amount;
     this.reimb_date =reimb_date;
+
     this.reimb_desc =reimb_desc;
     this.reimb_type =reimb_type;
     this.reimb_status =reimb_status;
@@ -30,13 +36,17 @@ public class ResponseRemDTO {
     this.userrole=userRole;
     }
 
+
+
     public int getId() {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
+
 
     public int getReimb_amount() {
         return reimb_amount;
@@ -115,12 +125,12 @@ public class ResponseRemDTO {
         if (this == o) return true;
         if (!(o instanceof ResponseRemDTO)) return false;
         ResponseRemDTO that = (ResponseRemDTO) o;
-        return getId() == that.getId() && getReimb_amount() == that.getReimb_amount() && getReimb_date().equals(that.getReimb_date()) && getReimb_desc().equals(that.getReimb_desc()) && getReimb_type().equals(that.getReimb_type()) && getReimb_status().equals(that.getReimb_status()) && getFirstname().equals(that.getFirstname()) && getLastname().equals(that.getLastname()) && getEmail().equals(that.getEmail()) && getUserrole().equals(that.getUserrole());
+        return getId() == that.getId() && getReimb_amount() == that.getReimb_amount() && Objects.equals(getReimb_desc(), that.getReimb_desc()) && Objects.equals(getReimb_date(), that.getReimb_date()) && Objects.equals(getReimb_type(), that.getReimb_type()) && Objects.equals(getReimb_status(), that.getReimb_status()) && Objects.equals(getFirstname(), that.getFirstname()) && Objects.equals(getLastname(), that.getLastname()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getUserrole(), that.getUserrole());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getReimb_amount(), getReimb_date(), getReimb_desc(), getReimb_type(), getReimb_status(), getFirstname(), getLastname(), getEmail(), getUserrole());
+        return Objects.hash(getId(), getReimb_amount(), getReimb_desc(), getReimb_date(),  getReimb_type(), getReimb_status(), getFirstname(), getLastname(), getEmail(), getUserrole());
     }
 
     @Override
@@ -128,8 +138,9 @@ public class ResponseRemDTO {
         return "ResponseRemDTO{" +
                 "id=" + id +
                 ", reimb_amount=" + reimb_amount +
-                ", reimb_date='" + reimb_date + '\'' +
                 ", reimb_desc='" + reimb_desc + '\'' +
+                ", reimb_date='" + reimb_date + '\'' +
+
                 ", reimb_type='" + reimb_type + '\'' +
                 ", reimb_status='" + reimb_status + '\'' +
                 ", firstname='" + firstname + '\'' +
