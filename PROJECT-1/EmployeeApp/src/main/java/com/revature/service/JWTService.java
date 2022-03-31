@@ -13,13 +13,24 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 
 public class JWTService {
+    private static JWTService instance;
+
     private Key key;
 
-
-    public JWTService() {
+    private JWTService() {
         byte[] secret = "my_secret_password_asdfasdfjkljclkvjl13432k2312jlkj3941809df".getBytes();
-        key = Keys.hmacShaKeyFor(secret); // Create a key using our secret password
+        key = Keys.hmacShaKeyFor(secret);
     }
+
+    // method
+    public static JWTService getInstance() {
+        if (JWTService.instance == null) {
+            JWTService.instance = new JWTService();
+        }
+
+        return JWTService.instance;
+    }
+
 
     // Signing a JWT with the key
     public String createJWT(User user) {

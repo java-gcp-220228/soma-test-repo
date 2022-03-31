@@ -23,6 +23,9 @@ public class ReimbursementService {
     public ReimbursementService() {
         this.reimbursementDao = new ReimbursementDao();
     }
+    public ReimbursementService(ReimbursementDao mockDao){
+        this.reimbursementDao =mockDao;
+    }
 
 
     /*----------------Add Reimburement------------*/
@@ -81,7 +84,7 @@ public class ReimbursementService {
         return responsegetRemdto;
     }
     public List<ResponsegetRemdto> getAllReimbursements(int userId) throws SQLException {
-        List<Reimbursement> reimbursements = this.reimbursementDao.getAllReimbursement();
+        List<Reimbursement> reimbursements = this.reimbursementDao.getAllReimbursementByUserId(userId);
         if(reimbursements.isEmpty()){
             throw  new  IllegalArgumentException("No Reimbursement available");
         }
@@ -112,12 +115,12 @@ public class ReimbursementService {
             throw new IllegalArgumentException("Reimbursement ID and user ID provided must be int values");
         }
     }
-    public InputStream getReimburseImage(String remId, String userId) throws SQLException, ImageNotFoundException {
+    public InputStream getReimburseImage(String remId) throws SQLException, ImageNotFoundException {
         try {
             int rId = Integer.parseInt(remId);
-            int uId = Integer.parseInt(userId);
+            //int uId = Integer.parseInt(userId);
 
-            InputStream is = this.reimbursementDao.getReimbursementImage(rId, uId);
+            InputStream is = this.reimbursementDao.getReimbursementImage(rId);
 
             if (is == null) {
                 throw new ImageNotFoundException("Rembursement with id " + remId + " does not have an image");

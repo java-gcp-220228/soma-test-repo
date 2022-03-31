@@ -129,7 +129,7 @@ public class ReimbursementDao {
 
         try (Connection con = ConnectionUtility.getConnection()) {
             List<Reimbursement> reimbursements = new ArrayList<>();
-            String sql = "select r.id ,r.reimb_amount ,r.reimb_submitted,r.reimb_resolved ,r.reimb_desc,r.reimb_receipt,r.reimb_author,r.reimb_resolver,\n" +
+            String sql = "select r.id ,r.reimb_amount ,r.reimb_submitted,r.reimb_resolved ,r.reimb_desc,r.reimb_receipt,r.reimb_author,r.reimb_resolver," +
                     "r.reimb_status_id,reimb_type_id from ers_reimb as r order by id";
             PreparedStatement pstmt = con.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -141,12 +141,15 @@ public class ReimbursementDao {
 
 
             while (rs.next()) {
+
                 int rid = rs.getInt("id");
                 int ramt = rs.getInt("reimb_amount");
 
                 String rsubdate = rs.getTimestamp("reimb_submitted").toString();
                 if (!(rs.getTimestamp("reimb_resolved") == null)) {
                     rresolvedate = rs.getTimestamp("reimb_resolved").toString();
+                }else{
+                    rresolvedate = "N/A";
                 }
                 String rdesc = rs.getString("reimb_desc");
                 int rauthor = rs.getInt("reimb_author");
@@ -155,9 +158,12 @@ public class ReimbursementDao {
                     rresolve = rs.getInt("reimb_resolver");
                     manager = getUser(rresolve);
 
+                }else{
+                     manager = new User("N/A", "N/A", "N/A", "N/A");
                 }
 
                 if (rs.getInt("reimb_status_id") != 0) {
+                    rstatus_id =rs.getInt("reimb_status_id");
                     rstatus = getStatus(rstatus_id);
                 } else {
                     rstatus = "PENDING";
@@ -180,13 +186,13 @@ public class ReimbursementDao {
         }
     }
 
-    public InputStream getReimbursementImage(int rId, int uId) throws SQLException {
+    public InputStream getReimbursementImage(int rId) throws SQLException {
         try (Connection con = ConnectionUtility.getConnection()) {
-            String sql = "select  REIMB_RECEIPT from ers_reimb where id=? and reimb_author=?";
+            String sql = "select  REIMB_RECEIPT from ers_reimb where id=?";
 
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, rId);
-            pstmt.setInt(2, uId);
+
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -205,9 +211,9 @@ public Reimbursement Updatereimbursement(int remId, String status, int userId) t
             con.setAutoCommit(false);
             int sId= getStatusid(status);
             String sql = "update ers_reimb set reimb_resolved=?,reimb_resolver=?,reimb_status_id=? where id=?";
-            Timestamp curdate = new Timestamp(datetime);
+            Timestamp curdate1 = new Timestamp(datetime);
             PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setTimestamp(1, curdate);
+            pstmt.setTimestamp(1, curdate1);
             pstmt.setInt(2, userId);
             pstmt.setInt(3, sId);
             pstmt.setInt(4, remId);
@@ -228,30 +234,34 @@ public Reimbursement Updatereimbursement(int remId, String status, int userId) t
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
             String rresolvedate = "N/A";
-            User manager = new User("N/A", "N/A", "N/A", "N/A");
+
             int rresolve;
             int rstatus_id = 0;
             String rstatus;
-
+            User manager = null;
 
             while (rs.next()) {
+
                 int rid = rs.getInt("id");
                 int ramt = rs.getInt("reimb_amount");
 
                 String rsubdate = rs.getTimestamp("reimb_submitted").toString();
                 if (!(rs.getTimestamp("reimb_resolved") == null)) {
                     rresolvedate = rs.getTimestamp("reimb_resolved").toString();
-                }
+                }else{rresolvedate = "N/A";}
                 String rdesc = rs.getString("reimb_desc");
                 int rauthor = rs.getInt("reimb_author");
                 User user = getUser(rauthor);
                 if (rs.getInt("reimb_resolver") != 0) {
                     rresolve = rs.getInt("reimb_resolver");
-                    manager = getUser(rresolve);
+                     manager = getUser(rresolve);
 
+                }else{
+                     manager = new User("N/A", "N/A", "N/A", "N/A");
                 }
 
                 if (rs.getInt("reimb_status_id") != 0) {
+                    rstatus_id=rs.getInt("reimb_status_id");
                     rstatus = getStatus(rstatus_id);
                 } else {
                     rstatus = "PENDING";
@@ -297,6 +307,8 @@ public Reimbursement Updatereimbursement(int remId, String status, int userId) t
                 String rsubdate = rs.getTimestamp("reimb_submitted").toString();
                 if (!(rs.getTimestamp("reimb_resolved") == null)) {
                     rresolvedate = rs.getTimestamp("reimb_resolved").toString();
+                }else{
+                    rresolvedate = "N/A";
                 }
                 String rdesc = rs.getString("reimb_desc");
                 int rauthor = rs.getInt("reimb_author");
@@ -305,6 +317,9 @@ public Reimbursement Updatereimbursement(int remId, String status, int userId) t
                     rresolve = rs.getInt("reimb_resolver");
                     manager = getUser(rresolve);
 
+                }else
+                {
+                     manager = new User("N/A", "N/A", "N/A", "N/A");
                 }
 
                 if (rs.getInt("reimb_status_id") != 0) {

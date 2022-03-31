@@ -15,7 +15,7 @@ public class AuthenticationController implements  Controller{
     public AuthenticationController() {
         this.userservice = new UserService();
         this.loginInfo =new LoginDTO();
-        this.jwtservice =new JWTService();
+        this.jwtservice = JWTService.getInstance();
     }
 
     private Handler login =(ctx)->{
@@ -24,7 +24,8 @@ public class AuthenticationController implements  Controller{
         loginInfo = ctx.bodyAsClass(LoginDTO.class);
         User user = userservice.login(loginInfo.getUsername(),loginInfo.getPassword());
         String jwt =this.jwtservice.createJWT(user);
-        ctx.header("Access-Control-Expose-Header","*");
+        ctx.header("Access-Control-Expose-Headers","*");
+
         ctx.header("Token",jwt);
         ctx.json(user);
 

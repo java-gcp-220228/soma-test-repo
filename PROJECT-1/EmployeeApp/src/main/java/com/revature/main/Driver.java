@@ -24,7 +24,8 @@ public class Driver {
             logger.info(ctx.method()+" : Request received for" +ctx.path());
         });
     map(app,new AuthenticationController(),new ReimbursementController(),new ExceptionController());
-        app.start(8080);}
+        app.start(8081);
+    }
     public static void map(Javalin app, Controller... controllers) {
         for (Controller c : controllers) {
             c.mapEndpoints(app);

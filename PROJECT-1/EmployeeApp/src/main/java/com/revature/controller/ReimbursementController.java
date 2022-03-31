@@ -22,7 +22,7 @@ public class ReimbursementController implements Controller {
     private ReimbursementService reimbursementservice;
 
     public ReimbursementController() {
-        this.jwtservice =new JWTService();
+        this.jwtservice =JWTService.getInstance();
         this.reimbursementservice =new ReimbursementService();
     }
 
@@ -66,9 +66,9 @@ public class ReimbursementController implements Controller {
     private Handler getAssignmentImage = (ctx) -> {
 
 
-        String userId = ctx.pathParam("user_id");
+        //String userId = ctx.pathParam("user_id");
         String remId = ctx.pathParam("reimburse_id");
-        InputStream image = this.reimbursementservice.getReimburseImage(remId, userId);
+        InputStream image = this.reimbursementservice.getReimburseImage(remId);
 
         Tika tika = new Tika();
         String mimeType = tika.detect(image);
@@ -85,7 +85,7 @@ public class ReimbursementController implements Controller {
         }
 
         String remId = ctx.pathParam("reimburse_id");
-        String status = ctx.formParam("status");
+        String status = ctx.queryParam("status");
         int userId = token.getBody().get("user_id", Integer.class);
 
         if (status == null) {
@@ -119,8 +119,8 @@ public class ReimbursementController implements Controller {
     public void mapEndpoints(Javalin app) {
         app.post("/users/{user_id}/reimbursement", addReimbursement); // specific user
         app.get("/users/{user_id}/reimbursements", getSpecificUserreimbursements); // specific user
-        app.get("/login1", getAllReimbursements);//MANAGER
-        app.get("/users/{user_id}/reimbursements/{reimburse_id}/image", getAssignmentImage);
-        app.patch("/login1/{reimburse_id}", UpdateReimbursement); // trainers
+        app.get("/rembursements", getAllReimbursements);//MANAGER
+        app.get("/reimbursements/{reimburse_id}/image", getAssignmentImage);
+        app.patch("/rembursement/{reimburse_id}", UpdateReimbursement); // trainers
     }
 }

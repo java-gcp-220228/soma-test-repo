@@ -15,6 +15,11 @@ public class UserService {
         this.userDao = new UserDao();
     }
 
+    public UserService(UserDao mockDao) {
+        this.userDao = mockDao;
+    }
+
+
     public User login(String userName, String password) throws SQLException, FailedLoginException {
         User user =  this.userDao.getUserByUserNameAndPassword(userName,password);
         if(user == null){
