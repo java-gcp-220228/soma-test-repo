@@ -8,7 +8,7 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
+mainClassName = 'com.revature.main.Driver'
 
 jar {
     manifest {

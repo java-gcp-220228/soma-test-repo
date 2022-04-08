@@ -18,5 +18,6 @@ public class ConnectionUtilityTest {
     public void test_getConnection() throws SQLException, SQLException {
         ConnectionUtility.getConnection();
 
+
     }
 }

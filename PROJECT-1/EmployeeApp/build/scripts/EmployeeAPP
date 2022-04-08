@@ -201,7 +201,7 @@ fi
 
 set -- \
         -classpath "$CLASSPATH" \
-         \
+        com.revature.main.Driver \
         "$@"
 
 # Use "xargs" to parse quoted args.

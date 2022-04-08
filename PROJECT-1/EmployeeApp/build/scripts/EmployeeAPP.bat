@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\EmployeeAPP-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jjwt-im
 
 
 @rem Execute EmployeeAPP
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %EMPLOYEE_APP_OPTS%  -classpath "%CLASSPATH%"  %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %EMPLOYEE_APP_OPTS%  -classpath "%CLASSPATH%" com.revature.main.Driver %*
 
 :end
 @rem End local scope for the variables with windows NT shell
